@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bque.zst1.annotation.NotLogin;
+
 /**
  * Handles requests for the application home page.
  */
@@ -39,6 +41,7 @@ public class HomeController {
 	/**
 	 * web chat
 	 */
+	@NotLogin
 	@RequestMapping(value = "/webChat")
 	public String webChat(Locale locale, Model model) {
 		

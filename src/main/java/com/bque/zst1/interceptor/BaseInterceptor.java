@@ -6,8 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
+
+import com.bque.zst1.annotation.NotLogin;
 
 public class BaseInterceptor extends WebContentInterceptor {
 	/** The Constant logger. */
@@ -22,6 +25,21 @@ public class BaseInterceptor extends WebContentInterceptor {
 		super.preHandle(request, response, handler);
 		
 		logger.debug("	################### preHandle start ");
+		
+		
+		// 기본 url mapping 핸들러만 적용
+		if (handler instanceof HandlerMethod) {
+			NotLogin notLogin = ((HandlerMethod) handler).getMethodAnnotation(NotLogin.class);
+			
+			// 로그인 체크 로직
+			if(notLogin == null){
+				
+			}
+		}
+		else{
+			logger.debug("WebSocketHttpRequestHandler");
+		}
+		
 		logger.debug("	################### preHandle end ");
 		
 		return true; 

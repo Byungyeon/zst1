@@ -31,5 +31,13 @@
 	<beans:bean id="webChatHandler" class="com.bque.zst1.handler.WebChatHandler"/>
 	
 	
+	<!-- interceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:bean class="com.bque.zst1.interceptor.BaseInterceptor" />
+		</interceptor>
+	</interceptors>
+	
 	
 </beans:beans>
