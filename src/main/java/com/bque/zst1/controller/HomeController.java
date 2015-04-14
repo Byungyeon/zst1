@@ -1,4 +1,4 @@
-package com.bque.zst1;
+package com.bque.zst1.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
