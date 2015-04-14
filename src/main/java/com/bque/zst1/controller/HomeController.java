@@ -36,4 +36,13 @@ public class HomeController {
 		return "home";
 	}
 	
+	/**
+	 * web chat
+	 */
+	@RequestMapping(value = "/webChat")
+	public String webChat(Locale locale, Model model) {
+		
+		return "webChat";
+	}
+	
 }
