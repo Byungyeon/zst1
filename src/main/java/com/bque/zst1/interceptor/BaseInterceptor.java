@@ -52,8 +52,8 @@ public class BaseInterceptor extends WebContentInterceptor {
 		// TODO Auto-generated method stub
 		super.postHandle(request, response, handler, modelAndView);
 		
-		logger.debug("	################### preHandle start ");
-		logger.debug("	################### preHandle end ");
+		logger.debug("	################### postHandle start ");
+		logger.debug("	################### postHandle end ");
 	}
 	
 	@Override
@@ -63,7 +63,7 @@ public class BaseInterceptor extends WebContentInterceptor {
 		// TODO Auto-generated method stub
 		super.afterCompletion(request, response, handler, ex);
 		
-		logger.debug("	################### preHandle start ");
-		logger.debug("	################### preHandle end ");
+		logger.debug("	################### afterCompletion start ");
+		logger.debug("	################### afterCompletion end ");
 	}
 }

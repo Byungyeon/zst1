@@ -1,0 +1,19 @@
+<Context reloadable="true" privileged="true"> 
+<!-- url="jdbc:oracle:thin:@106.246.247.74:1521:mim" -->
+<!-- url="jdbc:oracle:thin:@221.141.0.246:1521:BIDIGO" -->
+	<Resource name="jdbc/Oracle/mallstore" 
+   			  auth="Container"
+   			  type="javax.sql.DataSource" 
+   			  username="lshop" 
+   			  password="ahftmxhdj"
+   			  driverClassName="oracle.jdbc.driver.OracleDriver"
+   			  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+   			  url="jdbc:oracle:thin:@106.246.247.74:1521:mim" 
+   			  maxActive="30" 
+   			  maxIdle="10"
+			  maxWait="-1"
+			  validationQuery="SELECT 1 FROM DUAL"
+			  connectionProperties="SetBigStringTryClob=true"/>  
+ </Context>
+ 
+ 
