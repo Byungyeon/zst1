@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd                        
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+	
+<http auto-config="true" use-expressions="true">
+	<csrf disabled="true"/>
+	
+	<!-- 권한 체크 URL 설정 -->
+	<intercept-url pattern="/favicon.ico" access="permitAll" />
+	<intercept-url pattern="/login" access="permitAll" />
+	<intercept-url pattern="/loginCustom" access="permitAll" />
+    <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+    
+    <!-- anonymous 권한 부여시 exception 처리  -->
+    <anonymous/>
+    
+    <!-- 로그인 폼 변경, 속성, 인증 성공&실패 핸들러 설정  -->
+	<form-login login-page="/loginCustom" 
+		username-parameter="username" 
+		password-parameter="password"
+		login-processing-url="/j_spring_security_check" 
+		authentication-success-handler-ref="loginSuccessHandler"
+		authentication-failure-handler-ref="loginFailureHandler"
+	/>
+	<!-- form-login login-page="/loginCustom" username-parameter="username" password-parameter="password" login-processing-url="//j_spring_security_check" default-target-url="/" /-->
+</http>
+
+<authentication-manager>
+    <authentication-provider>
+        <user-service>
+            <user name="guest" password="guest" authorities="ROLE_USER"/>    
+        </user-service>
+    </authentication-provider>
+</authentication-manager>
+		
+<beans:bean id="loginSuccessHandler" class="com.bque.zst1.handler.LoginSuccessHandler" />		
+<beans:bean id="loginFailureHandler" class="com.bque.zst1.handler.LoginFailureHandler" />		
+		
+</beans:beans>

@@ -48,4 +48,14 @@ public class HomeController {
 		return "webChat";
 	}
 	
+	/**
+	 * loginCustom
+	 */
+	@NotLogin
+	@RequestMapping(value = "/loginCustom")
+	public String loginCustom(Locale locale, Model model) {
+		
+		return "loginCustom";
+	}
+	
 }
