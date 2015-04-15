@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bque.zst1.dao.mapinfo.TestMapper">
+
+	<select id="selectTestList" parameterType="com.bque.zst1.utils.SOMap" resultType="com.bque.zst1.utils.SOMap" >
+		SELECT *
+		FROM T_USER
+	</select>
+		
+</mapper>
