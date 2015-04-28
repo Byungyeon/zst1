@@ -24,7 +24,9 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.bque.zst1" />
-	
+
+
+	<!-- websocket handler -->
 	<websocket:handlers>
 		<websocket:mapping handler="webChatHandler" path="/webChatServer"/>
 	</websocket:handlers>		

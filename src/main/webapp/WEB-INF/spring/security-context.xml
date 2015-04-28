@@ -11,6 +11,7 @@
 	<intercept-url pattern="/favicon.ico" access="permitAll" />
 	<intercept-url pattern="/login" access="permitAll" />
 	<intercept-url pattern="/loginCustom" access="permitAll" />
+	<intercept-url pattern="/angular_**" access="permitAll" />
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
     
     <!-- anonymous 권한 부여로 인한 exception 처리 제거 -->
