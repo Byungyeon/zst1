@@ -61,6 +61,10 @@
         
 </http>
 
+<!-- 로그인 성공, 실패 처리 handler 설정 -->		
+<beans:bean id="loginSuccessHandler" class="com.bque.zst1.handler.LoginSuccessHandler" />		
+<beans:bean id="loginFailureHandler" class="com.bque.zst1.handler.LoginFailureHandler" />		
+
 
 <!-- 사용자 정보 설정 -->
 <!-- authentication-manager>
@@ -94,10 +98,5 @@
         </beans:value>
     </beans:property>
 </beans:bean>    
-		
-		
-<!-- 로그인 성공, 실패 처리 handler 설정 -->		
-<beans:bean id="loginSuccessHandler" class="com.bque.zst1.handler.LoginSuccessHandler" />		
-<beans:bean id="loginFailureHandler" class="com.bque.zst1.handler.LoginFailureHandler" />		
 		
 </beans:beans>
