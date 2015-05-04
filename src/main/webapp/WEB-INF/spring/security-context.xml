@@ -8,11 +8,25 @@
 	<csrf disabled="true"/>
 	
 	<!-- 권한 체크 URL 설정 -->
+		<!-- access 표현식
+			hasIpAddress(ip) : 접근자의 IP주소가 매칭하는지 확인합니다.
+			hasRole(role) : 역할이 부여된 권한(Granted Authority)와 일치하는지 확인합니다.
+			hasAnyRole(role) : 부여된 역할 중 일치하는 항목이 있는지 확인합니다.
+                 예 - access = "hasAnyRole('ROLE_USER','ROLE_ADMIN')"
+
+			permitAll : 모든 접근자를 항상 승인합니다.
+			denyAll : 모든 사용자의 접근을 거부합니다.
+			anonymous : 사용자가 익명 사용자인지 확인합니다.
+			authenticated : 인증된 사용자인지 확인합니다.
+			rememberMe : 사용자가 remember me를 사용해 인증했는지 확인합니다.
+			fullyAuthenticated : 사용자가 모든 크리덴셜을 갖춘 상태에서 인증했는지 확인합니다. 
+		-->
 	<intercept-url pattern="/favicon.ico" access="permitAll" />
 	<intercept-url pattern="/login" access="permitAll" />
 	<intercept-url pattern="/loginCustom" access="permitAll" />
 	<intercept-url pattern="/angular_**" access="permitAll" />
-    <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+    <!-- intercept-url pattern="/**" access="hasRole('ROLE_USER')" /-->
+    <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
     
     <!-- anonymous 권한 부여로 인한 exception 처리 제거 -->
     <anonymous/>
@@ -47,14 +61,42 @@
         
 </http>
 
-<authentication-manager>
+
+<!-- 사용자 정보 설정 -->
+<!-- authentication-manager>
     <authentication-provider>
         <user-service>
             <user name="guest" password="guest" authorities="ROLE_USER"/>    
         </user-service>
     </authentication-provider>
+</authentication-manager-->
+
+
+<!-- 사용자 정보 JDBC 설정 -->
+<authentication-manager>
+    <authentication-provider user-service-ref="securityService" />
 </authentication-manager>
+    
+<beans:bean id="securityService" class="com.bque.zst1.dao.SecurityJdbcDaoImpl">
+    <beans:property name="dataSource" ref="dataSource" />
+    <beans:property name="usersByUsernameQuery">
+        <beans:value>
+            SELECT        principle, password, enabled
+            FROM        t_security_users
+            WHERE       id = ?
+        </beans:value>
+    </beans:property>
+    <beans:property name="authoritiesByUsernameQuery">
+        <beans:value>
+            SELECT        principle, authority
+            FROM        t_security_authorities
+            WHERE        principle = ?
+        </beans:value>
+    </beans:property>
+</beans:bean>    
 		
+		
+<!-- 로그인 성공, 실패 처리 handler 설정 -->		
 <beans:bean id="loginSuccessHandler" class="com.bque.zst1.handler.LoginSuccessHandler" />		
 <beans:bean id="loginFailureHandler" class="com.bque.zst1.handler.LoginFailureHandler" />		
 		
