@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,11 +27,13 @@ public class AngularController {
 	 * angular test
 	 */
 	@NotLogin
-	@RequestMapping(value = {"/angular_01", "/angular_02"} )
+	@RequestMapping(value = "/angular_{name}" )
+//	public String angular(Locale locale, Model model, ModelMap map, @PathVariable("name") String name) {
 	public String angular(Locale locale, Model model, ModelMap map) {
 		
 		return "/angular" + ServletRequestInfoUtil.getRequest().getRequestURI();
 	}
+	
 	
 	/**
 	 * angular json
@@ -38,7 +41,7 @@ public class AngularController {
 	@NotLogin
 	@ResponseBody
 	@RequestMapping(value = {"/angular_02_json"}, produces = "application/json; charset=utf8" )
-	public String angularJson(Locale locale, Model model, ModelMap map) {
+	public String angularJson02(Locale locale, Model model, ModelMap map) {
 		
 		ArrayList<Object> list = new ArrayList<Object>();
 		HashMap<String, String> dataMap = new HashMap<String, String>(); 
@@ -61,8 +64,36 @@ public class AngularController {
 		list.add(dataMap);
 		
 		JSONObject json = new JSONObject();
-
+		
 		json.put("list", list);
+		
+		
+		return json.toString();
+	}
+	
+	
+	/**
+	 * angular json
+	 */
+	@NotLogin
+	@ResponseBody
+	@RequestMapping(value = {"/angular_05_json"}, produces = "application/json; charset=utf8" )
+	public String angularJson05(Locale locale, Model model, ModelMap map) {
+		
+		JSONObject json = new JSONObject();
+		ArrayList<Object> list = new ArrayList<Object>();
+		HashMap<String, String> dataMap = new HashMap<String, String>(); 
+		
+		dataMap.put("checked", "checked");
+		dataMap.put("work", "angularJS 튜토리얼 다 보기");
+		list.add(dataMap);
+		
+		dataMap = new HashMap<String, String>();
+		dataMap.put("checked", "");
+		dataMap.put("work", "angularJS 이해하기");
+		list.add(dataMap);
+		
+		json.put("data", list);
 		
 		
 		return json.toString();
