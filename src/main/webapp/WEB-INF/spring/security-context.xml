@@ -65,7 +65,6 @@
 <beans:bean id="loginSuccessHandler" class="com.bque.zst1.handler.LoginSuccessHandler" />		
 <beans:bean id="loginFailureHandler" class="com.bque.zst1.handler.LoginFailureHandler" />		
 
-
 <!-- 사용자 정보 설정 -->
 <!-- authentication-manager>
     <authentication-provider>
@@ -74,7 +73,6 @@
         </user-service>
     </authentication-provider>
 </authentication-manager-->
-
 
 <!-- 사용자 정보 JDBC 설정 -->
 <authentication-manager>
